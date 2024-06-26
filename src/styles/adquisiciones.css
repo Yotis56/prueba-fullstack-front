@@ -1,0 +1,20 @@
+.container{
+    height: 80%;
+    width: 80%;
+    background-color: white;
+    margin: auto;
+    padding: 5%;
+}
+.input-container{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.input-container input {
+    margin-left: 25px;
+    padding: 5px 10px;
+    border: 1px solid var(--indigo);
+    border-radius: 2px;
+    width: 70%;
+}
