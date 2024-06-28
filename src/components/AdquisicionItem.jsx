@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom'
 import '../styles/adquisicionItem.css'
 import editIcon from '../assets/icons/editicon.svg'
 import historyIcon from '../assets/icons/historyicon.svg'
@@ -28,6 +29,7 @@ const AdquisicionItem = ({adquisicion, setIsEdit, setItemToEdit, setViewModal}) 
             }
         }
     }
+    
 
     const fechaAdquisicion = new Date(adquisicion.fechaadquisicion)
     const fecha = fechaAdquisicion.toLocaleDateString('es-Co', {month: 'long' , day: 'numeric' ,year: 'numeric',  })
@@ -79,7 +81,9 @@ const AdquisicionItem = ({adquisicion, setIsEdit, setItemToEdit, setViewModal}) 
             </div>
             <div className="buttons_container">
                 <img src={editIcon} width='50px' alt="" onClick={handleEdit}/>
-                <img src={historyIcon} width='50px' alt="" />
+                <Link to={`/adquisiciones/${adquisicion.id}`}>
+                    <img src={historyIcon} width='50px' alt="" />
+                </Link>
                 <img src={deleteIcon} width='50px' alt="" onClick={handleDelete}/>
             </div>
         </li>

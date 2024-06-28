@@ -13,11 +13,11 @@ const Home = () => {
   
     useEffect( () => {
         const retrieveData = async () => {
-        const response = await fetch('http://localhost:3000/requerimientos')
-        const responseJson = await response.json()
-        setData(responseJson)}
+            const response = await fetch('http://localhost:3000/requerimientos')
+            const responseJson = await response.json()
+            setData(responseJson)
+        }
         retrieveData()
-        console.log('se muestra el componente Home')
     }, [])
 
     const handleClick = () => {
@@ -42,9 +42,11 @@ const Home = () => {
                 </div>
                 <div className="content">
                     <ul>
-                        {
+                        { data.length > 0?
                         data.map( item => {
                         return <AdquisicionItem key={item.id} adquisicion={item} setIsEdit={setIsEdit} setItemToEdit={setItemToEdit} setViewModal={setViewModal}/> })
+                        : 
+                        <p>No hay registros almacenados.</p>
                         }
                     </ul>
                     
