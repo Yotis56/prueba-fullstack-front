@@ -1,45 +1,57 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AdresLogo from './assets/logo-adres.svg'
-import './App.css'
 import { Modal } from './components/Modal'
 import { Adquisiciones } from './components/Adquisiciones'
-const data = [
-  {
-    id: 1,
-    createdAt: '',
-    updatedAt: '',
-    presupuesto: 50000,
-    unidad: 'Dirección de medicamentos',
-    tipo: 'Medicamentos',
-    cantidad: 500, 
-    valorUnitario: 1000,
-    fechaAdquisición: '',
-    proveedor: 'Bayer',
-    documentacion: [
-      'orden de compra 2023-07-20-001',
-      'Factura 2023-07-20-001'
-    ]
-  },
-  {
-    id: 2,
-    createdAt: '22-06-2024',
-    updatedAt: '22-06-2024',
-    presupuesto: 50000,
-    unidad: 'Dirección de medicamentos',
-    tipo: 'Medicamentos',
-    cantidad: 500, 
-    valorUnitario: 1000,
-    fechaAdquisición: '',
-    proveedor: 'Bayer',
-    documentacion: [
-      'orden de compra 2023-07-20-001',
-      'Factura 2023-07-20-001'
-    ]
-  },
-]
+import { AdquisicionItem } from './components/AdquisicionItem'
+import './App.css'
+// const dataFake = [
+//   {
+//     id: 1,
+//     createdAt: '',
+//     updatedAt: '',
+//     presupuesto: 50000,
+//     unidad: 'Dirección de medicamentos',
+//     tipo: 'Medicamentos',
+//     cantidad: 500, 
+//     valorUnitario: 1000,
+//     fechaAdquisición: '',
+//     proveedor: 'Bayer',
+//     documentacion: [
+//       'orden de compra 2023-07-20-001',
+//       'Factura 2023-07-20-001'
+//     ]
+//   },
+//   {
+//     id: 2,
+//     createdAt: '22-06-2024',
+//     updatedAt: '22-06-2024',
+//     presupuesto: 50000,
+//     unidad: 'Dirección de medicamentos',
+//     tipo: 'Medicamentos',
+//     cantidad: 500, 
+//     valorUnitario: 1000,
+//     fechaAdquisición: '',
+//     proveedor: 'Bayer',
+//     documentacion: [
+//       'orden de compra 2023-07-20-001',
+//       'Factura 2023-07-20-001'
+//     ]
+//   },
+// ]
 
 function App() {
   const [viewModal, setViewModal] = useState()
+  const [data, setData] = useState([])
+  
+  useEffect( () => {
+    const retrieveData = async () => {
+      const response = await fetch('http://localhost:3000/requerimientos')
+      const responseJson = await response.json()
+      setData(responseJson)
+    }
+    retrieveData()
+  }, [])
+  
   const handleClick = () => {
     setViewModal(true)
   }
@@ -54,8 +66,8 @@ function App() {
             <p>mediante este aplicativo ud podrá gestionar los requerimientos de adquisiciones </p>
           </div>
         </header>
-        <main className='border rounded border-slate-500'>
-          <div className="control w-full">
+        <main className=''>
+          <div className="control w-full border rounded border-slate-500">
             <div className="filtros">
               <label htmlFor="ordenar">Ordenar por</label>
               <select name="ordenar" id="ordenar">
@@ -68,36 +80,20 @@ function App() {
             <button className='agregar-btn' onClick={handleClick}>Agregar adquisición</button>
           </div>
           <div className="content">
-            <table>
-              <thead>
-                <tr>
-                  <th>fecha de creación</th>
-                  <th>Bien o servicio</th>
-                  <th>Presupuesto</th>
-                  <th>Detalles</th>
-                </tr>
-              </thead>
-              <tbody className='divide-y divide-slate-200'>
-                {data.map( item => {
-                  return (
-                    <tr key={item.id}>
-                      <td>{item.createdAt}</td>
-                      <td>{item.tipo}</td>
-                      <td>{item.presupuesto}</td>
-                      <td><a href="#">ver más...</a></td>
-                    </tr>
-                  )
-                })
+            <ul>
+                {
+                  data.map( item => {
+                  return <AdquisicionItem key={item.id} adquisicion={item}/> })
                 }
-              </tbody>
-            </table>
+            </ul>
+              
           </div> 
         </main>
       </div>
       {
         viewModal && 
         <Modal setViewModal={setViewModal}>
-          <Adquisiciones />
+          <Adquisiciones setViewModal={setViewModal} />
         </Modal>
       }
     </>
