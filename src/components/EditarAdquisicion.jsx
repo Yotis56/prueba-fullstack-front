@@ -1,22 +1,25 @@
-import { useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react'
 import closeIcon from '../assets/icons/closeicon.svg'
 import '../styles/adquisiciones.css'
 
-// eslint-disable-next-line react/prop-types
-const Adquisiciones = ({setViewModal}) => {    
 
-    const [adquisicion, setAdquisicion] = useState({presupuesto: '',
-        unidad: '',
-        tipo: '',
-        cantidad: '',
-        valorunitario: '',
-        fechaadquisicion: '',
-        proveedor: '',
-        documentacion: ''})
+const EditarAdquisición = ({setViewModal, setIsEdit, itemToEdit}) => {
 
+    const [adquisicion, setAdquisicion] = useState(itemToEdit)
+    useEffect( () => {
+        const fecha = new Date(adquisicion.fechaadquisicion)
+        const newDocumentacion = adquisicion.documentacion.toString().replaceAll(',',';')
+        setAdquisicion({
+            ...adquisicion, 
+            fechaadquisicion: fecha.toISOString().slice(0,10),
+            documentacion: newDocumentacion
+        })
+    }, [])
     
     const handleClose = () => {
         setViewModal(false)
+        setIsEdit(false)
     }
     const handleChange = (event) => {
         const target = event.target.name
@@ -27,8 +30,9 @@ const Adquisiciones = ({setViewModal}) => {
     }
     const handleSubmit = async (event) => {
         event.preventDefault()
-        const response = await fetch('http://localhost:3000/requerimientos/',{
-            method: "POST",
+        //acá tengo que hacer un update
+        const response = await fetch(`http://localhost:3000/requerimientos/${adquisicion.id}`,{
+            method: "PUT",
             mode: "cors",
             cache: "no-cache",
             credentials: "same-origin",
@@ -90,7 +94,7 @@ const Adquisiciones = ({setViewModal}) => {
                     <span className='text-sm'>Indique la documentación presentada, separada por punto y coma</span>
                 </div>
                 <div className="input-container">
-                    <button type='submit' onClick={handleSubmit} className="mt-5 py-3 rounded-md text-white group-invalid:pointer-events-none group-invalid:opacity-30">Registrar</button>
+                    <button type='submit' onClick={handleSubmit} className="mt-5 py-3 rounded-md text-white group-invalid:pointer-events-none group-invalid:opacity-30">Actualizar</button>
                 </div>
 
             </form>
@@ -98,5 +102,4 @@ const Adquisiciones = ({setViewModal}) => {
     )
 }
 
-
-export { Adquisiciones }
+export { EditarAdquisición }

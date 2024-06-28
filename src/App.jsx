@@ -4,6 +4,7 @@ import { Modal } from './components/Modal'
 import { Adquisiciones } from './components/Adquisiciones'
 import { AdquisicionItem } from './components/AdquisicionItem'
 import './App.css'
+import { EditarAdquisición } from './components/EditarAdquisicion'
 // const dataFake = [
 //   {
 //     id: 1,
@@ -40,7 +41,9 @@ import './App.css'
 // ]
 
 function App() {
-  const [viewModal, setViewModal] = useState()
+  const [viewModal, setViewModal] = useState(false)
+  const [isEdit, setIsEdit] = useState(false)
+  const [itemToEdit, setItemToEdit] = useState()
   const [data, setData] = useState([])
   
   useEffect( () => {
@@ -51,7 +54,7 @@ function App() {
     }
     retrieveData()
   }, [])
-  
+
   const handleClick = () => {
     setViewModal(true)
   }
@@ -83,7 +86,7 @@ function App() {
             <ul>
                 {
                   data.map( item => {
-                  return <AdquisicionItem key={item.id} adquisicion={item}/> })
+                  return <AdquisicionItem key={item.id} adquisicion={item} setIsEdit={setIsEdit} setItemToEdit={setItemToEdit} setViewModal={setViewModal}/> })
                 }
             </ul>
               
@@ -91,9 +94,15 @@ function App() {
         </main>
       </div>
       {
-        viewModal && 
+        (viewModal && !isEdit) && 
         <Modal setViewModal={setViewModal}>
           <Adquisiciones setViewModal={setViewModal} />
+        </Modal>
+      }
+      {
+        (viewModal && isEdit) && 
+        <Modal setViewModal={setViewModal} isEdit={isEdit} setIsEdit={setIsEdit}>
+          <EditarAdquisición setViewModal={setViewModal} setIsEdit={setIsEdit} itemToEdit={itemToEdit} />
         </Modal>
       }
     </>
