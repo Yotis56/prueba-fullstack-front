@@ -21,6 +21,8 @@ const AdquisicionItem = ({adquisicion, setIsEdit, setItemToEdit, setViewModal}) 
                     credentials: "same-origin",
                     referrerPolicy: "no-referrer",
                 })
+                window.alert('Se eliminó el requerimiento con éxito')
+                window.location.reload()
             } catch (error) {
                 console.log(error)
             }
