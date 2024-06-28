@@ -39,6 +39,9 @@ const Adquisiciones = ({setViewModal}) => {
             body: JSON.stringify(adquisicion)
         })
         console.log(response)
+        handleClose()
+        window.alert('Se Agregó el requerimiento con éxito')
+        window.location.reload()
     }
 
     return (

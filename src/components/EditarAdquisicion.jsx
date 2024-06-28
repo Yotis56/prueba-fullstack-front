@@ -30,19 +30,26 @@ const EditarAdquisición = ({setViewModal, setIsEdit, itemToEdit}) => {
     }
     const handleSubmit = async (event) => {
         event.preventDefault()
-        //acá tengo que hacer un update
-        const response = await fetch(`http://localhost:3000/requerimientos/${adquisicion.id}`,{
-            method: "PUT",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            referrerPolicy: "no-referrer",
-            body: JSON.stringify(adquisicion)
-        })
-        console.log(response)
+        try {
+            const response = await fetch(`http://localhost:3000/requerimientos/${adquisicion.id}`,{
+                method: "PUT",
+                mode: "cors",
+                cache: "no-cache",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                referrerPolicy: "no-referrer",
+                body: JSON.stringify(adquisicion)
+            })
+            console.log(response)
+            handleClose()
+            window.alert('Se modificó el requerimiento con éxito')
+            window.location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 
     return (

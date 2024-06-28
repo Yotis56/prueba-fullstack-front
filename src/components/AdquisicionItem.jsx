@@ -10,6 +10,22 @@ const AdquisicionItem = ({adquisicion, setIsEdit, setItemToEdit, setViewModal}) 
         setIsEdit(true)
         setItemToEdit(adquisicion)
     }
+    const handleDelete = async () => {
+        const confirm = window.confirm('¿Está seguro que desea eliminar la solicitud de Adquisición?')
+        if (confirm){
+            try {
+                await fetch(`http://localhost:3000/requerimientos/${adquisicion.id}`,{
+                    method: "DELETE",
+                    mode: "cors",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    referrerPolicy: "no-referrer",
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 
     const fechaAdquisicion = new Date(adquisicion.fechaadquisicion)
     const fecha = fechaAdquisicion.toLocaleDateString('es-Co', {month: 'long' , day: 'numeric' ,year: 'numeric',  })
@@ -52,8 +68,8 @@ const AdquisicionItem = ({adquisicion, setIsEdit, setItemToEdit, setViewModal}) 
                     <span className='item_title'>Documentación</span>
                     <div className="">
                         {
-                            adquisicion.documentacion.map( documento =>{
-                                return <small className='item_content' key={documento}>{documento}</small>
+                            adquisicion.documentacion.map( (documento, index) =>{
+                                return <small className='item_content' key={index}>{documento}</small>
                             })
                         }
                     </div>
@@ -62,7 +78,7 @@ const AdquisicionItem = ({adquisicion, setIsEdit, setItemToEdit, setViewModal}) 
             <div className="buttons_container">
                 <img src={editIcon} width='50px' alt="" onClick={handleEdit}/>
                 <img src={historyIcon} width='50px' alt="" />
-                <img src={deleteIcon} width='50px' alt="" />
+                <img src={deleteIcon} width='50px' alt="" onClick={handleDelete}/>
             </div>
         </li>
     )
