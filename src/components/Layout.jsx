@@ -1,5 +1,6 @@
 import { useOutlet } from 'react-router-dom'
 import AdresLogo from '../assets/logo-adres.svg'
+import '../styles/layout.css'
 
 const Layout = () => {
     const outlet = useOutlet()

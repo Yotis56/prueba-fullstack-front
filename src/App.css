@@ -13,11 +13,13 @@ main {
   padding: 8px 15px;
 }
 .agregar-btn {
-  background-color: var(--cyan);
-  color: var(--light);
+  font-size: 14px;
+  width: 105px;
+  background-color: var(--lightblue);
+  color: var(--dark);
   border: 1px solid var(--dark);
   padding: 4px 10px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 .content {
   margin-top: 20px;
@@ -29,4 +31,53 @@ main {
 .content table thead {
   text-align: left;
 }
-
+.filtros {
+  width: 85%;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+.filtros_item {
+  display: flex;
+  flex-direction: column;
+}
+.filtros_item label, .filtros_item span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-dark)
+}
+.filtros_item select {
+  font-size: 13px;
+  border: 1px solid #ccc;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+.filtros_item input {
+  width: 150px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+.filtro-btn {
+  font-size: 14px;
+  width: 80px;
+  background-color: var(--dark);
+  color: var(--light);
+  border: 1px solid var(--dark);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.filtros_inputs {
+  display: flex;
+}
+@media screen and (max-width: 1300px) {
+  .filtros_inputs {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 1100px){
+  .filtros_item input {
+    width: 100px;
+  }
+}

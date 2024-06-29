@@ -47,7 +47,7 @@ const Adquisiciones = ({setViewModal}) => {
     return (
         <div className="container">
             <img className='close-icon' src={closeIcon} alt="" onClick={handleClose}/>
-            <form className='group' noValidate>
+            <form className='adquisicion_form group' noValidate>
                 <div className="flex justify-around">
                     <div className="form-column">
                         <div className="input-container">

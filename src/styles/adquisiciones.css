@@ -6,7 +6,7 @@
     margin: auto;
     padding: 3%;
 }
-form {
+.adquisicion_form {
     margin: 5% 0;
     border-radius: 4px;
     display: flex;

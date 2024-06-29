@@ -26,6 +26,13 @@
 .item small {
     font-size: 10px;
 }
+.buttons_container {
+    width: 60px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 .buttons_container img {
     cursor: pointer;
 }
