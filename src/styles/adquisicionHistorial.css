@@ -1,4 +1,4 @@
-.historial_container {
+.historial_container h2, .historial_container .fecha_container{
     text-align: center;
     font-size: 20px;
     margin: 20px auto;

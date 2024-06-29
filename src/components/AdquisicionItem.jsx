@@ -41,7 +41,7 @@ const AdquisicionItem = ({adquisicion, setIsEdit, setItemToEdit, setViewModal}) 
                     <span className='item_title'>Presupuesto</span>
                     <p className='item_content'>{currencyFormat.format(adquisicion.presupuesto)}</p>
                 </div>
-                <div className="item">
+                <div className="item" style={{'grid-column': '2/4'}}>
                     <span className='item_title'>Unidad Encargada</span>
                     <p className='item_content'>{adquisicion.unidad}</p>
                 </div>
@@ -61,17 +61,17 @@ const AdquisicionItem = ({adquisicion, setIsEdit, setItemToEdit, setViewModal}) 
                     <span className='item_title'>Valor Total</span>
                     <p className='item_content'>{currencyFormat.format(adquisicion.valorunitario * adquisicion.cantidad)}</p>
                 </div>
-                <div className="item">
+                <div className="item" style={{'grid-column': '1/3'}}>
                     <span className='item_title'>Fecha de Adquisición</span>
                     <p className='item_content'>{fecha}</p>
                 </div>
-                <div className="item">
+                <div className="item" style={{'grid-column': '3/5'}}>
                     <span className='item_title'>Proveedor</span>
                     <p className='item_content'>{adquisicion.proveedor}</p>
                 </div>
-                <div className="item">
+                <div className="item" style={{'grid-column': '5/8'}}>
                     <span className='item_title'>Documentación</span>
-                    <div className="">
+                    <div className="documentacion_content">
                         {
                             adquisicion.documentacion.map( (documento, index) =>{
                                 return <small className='item_content' key={index}>{documento}</small>
