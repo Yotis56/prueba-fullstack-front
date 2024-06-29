@@ -1,8 +1,11 @@
-# React + Vite
+# Prueba Tecnica para ingeniero Full Stack Adres
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es el repositorio para la parte Frontend de la prueba técnica, para el puesto de ingeniero Full Stack. 
 
-Currently, two official plugins are available:
+Para probar esta parte del proyecto, siga los siguientes pasos: 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Clone o haga Fork al repositorio (si requiere permisos, no dude en solicitarlos)
+
+- Vaya a la carpeta del proyecto e instale las dependencias requeridas con el comando `npm install`
+
+- Puede ejecutar el proyecto en modo desarrollo, con el comando `npm run dev` (en el archivo package.json encuentra los demás comandos)
